@@ -42,13 +42,13 @@ def getMd5(_filename, _content):
 
 #return a record
 def getNewRecord(_filename, _content):
-	print("2.1")
+	#print("2.1")
 	ltime = time.time()
-	print("2.2")
+	#print("2.2")
 	ip = getIp()
-	print("2.3")
+	#print("2.3")
 	md5 = getMd5(_filename, _content)
-	print("2.4")
+	#print("2.4")
 	record = list()
 	record.append(_filename)
 	record.append(ip)
@@ -114,4 +114,4 @@ def deleteFile(_filename):
 if __name__ == "__main__":
 	#createFile("test.txt", "hello world")
 	#appendFile("test2.txt", "hello world1")
-	deleteFile("test.txt")
+	#deleteFile("test.txt")
