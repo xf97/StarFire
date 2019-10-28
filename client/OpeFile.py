@@ -112,6 +112,6 @@ def deleteFile(_filename):
 
 #uint test
 if __name__ == "__main__":
-	#createFile("test.txt", "hello world")
+	createFile("test.txt", "hello world")
 	#appendFile("test2.txt", "hello world1")
 	#deleteFile("test.txt")
