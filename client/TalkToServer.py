@@ -5,12 +5,17 @@ and report local file updates. At the same time, if the
 master node is down, this module also reports down.
 '''
 
+#author = __xiaofeng__
+#version = v0.1(2019/10/28)
+
 #test data
 tdata = ['test.txt', '192.168.43.245', 'c3b0928605f3bedf2b03996a6438100b', 1572250873.3573701]
 
 #server information
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 9999
+BUFFSIZE = 1024
+
 
 import socket
 
@@ -37,8 +42,11 @@ def sendMessage(_link, _message):
 		bytenum = _link.send(_message.encode("utf-8"))
 		if bytenum == 0 :
 			print("Fail send.")
+		#print(len(_message.encode("utf-8")))
+		data = _link.recv(BUFFSIZE)
+		if data:
+			print("master has reveiced the message ", data)
 		_link.close()
-		print("master has reveiced the message ", _message)
 	except:
 		print("Send message to master fail.")
 

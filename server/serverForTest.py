@@ -3,6 +3,9 @@
 The server is used to test client
 '''
 
+#author = __xiaofeng__
+#version = v0.1(2019/10/28)
+
 import socket
 import sys
 
@@ -10,6 +13,7 @@ import sys
 #server information
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 9999
+BUFFSIZE = 1024
 
 def getLink(_server, _port):
 	try:
@@ -24,7 +28,13 @@ def getLink(_server, _port):
 def listenMessage(_link):
 	try:
 		clientsocket, addr = _link.accept()
-		print("reveicve ", addr, " message.")
+		print(addr, " has connected.")
+		message = clientsocket.recv(BUFFSIZE)
+		if message:
+			clientsocket.send("receive your message".encode("utf-8"))
+			print(message)
+		else:
+			print(addr, " doesn't send data.")
 		clientsocket.close()
 	except:
 		print("listenMessage error.")
@@ -33,5 +43,6 @@ def listenMessage(_link):
 #unit test
 if __name__ == "__main__":
 	link = getLink(SERVER_IP, SERVER_PORT)
+	print("*" * 10, " server is working ", "*" * 10)
 	while True:
 		listenMessage(link)
