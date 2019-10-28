@@ -62,13 +62,13 @@ def createFile(_filename, _initContent = ""):
 	try:
 		if os.path.exists(_filename):
 			print("file exists, deleting original file.")
-		print("1")
+		#print("1")
 		f = open(_filename, "w", encoding = "utf8")
 		f.write(_initContent)
-		print("2")
+		#print("2")
 		f.close()
 		nRecord = getNewRecord(_filename, _initContent)
-		print("3")
+		#print("3")
 		print(nRecord)
 	except:
 		print("Create file fail.")
