@@ -25,14 +25,24 @@ def getLink(_server, _port):
 		print("fail to initial server.")
 		return None
 
+def mySplit(_str, _char):
+	li = list()
+	li = _str.split(_char)
+	return li
+
 def listenMessage(_link):
 	try:
+		if not _link:
+			print("connection errpr.")
+			return
 		clientsocket, addr = _link.accept()
 		print(addr, " has connected.")
 		message = clientsocket.recv(BUFFSIZE)
-		if message:
+		message = str(message)
+		oriMessage = mySplit(message, ":")
+		if oriMessage:
 			clientsocket.send("receive your message".encode("utf-8"))
-			print(message)
+			print(oriMessage)
 		else:
 			print(addr, " doesn't send data.")
 		clientsocket.close()
