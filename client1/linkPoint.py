@@ -13,19 +13,38 @@ child node is established by detecting the local directory
 import TalkToServer
 
 #author = __xiaofeng__
-#data = 2019/10/30(v0.1)
+#date = 2019/10/30(v0.1)
 
 #server information
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 9999
 BUFFSIZE = 1024
 
+#another information
+ANOTHER_PORT = 10000
+
 #test data
-filename = "a.txt"
+filename = ["a.txt"]
 
 def getFileAddress(_server_ip, _server_port, _message):
 	return TalkToServer.getStatus(_server_ip, _server_port, _message)
 
+def bytesToStr(_bytes):
+	return str(_bytes, encoding = "utf-8")
+
+def decode(_str):
+	return _str.split(":")[:-1]
+
+def getLocation(_list):
+	return _list[:2]
+
+def linkNode(_ip, _port, _filename):
+	s = TalkToServer.getLink(_ip, _port)
+
 #unit test
 if __name__ == "__main__":
-	print(getFileAddress(SERVER_IP, SERVER_PORT, filename))
+	answer = getFileAddress(SERVER_IP, SERVER_PORT, filename)
+	answer = bytesToStr(answer)
+	li = decode(answer)
+	li = getLocation(li)
+	linkNode(li[0], ANOTHER_PORT, li[1])

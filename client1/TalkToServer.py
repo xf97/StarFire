@@ -47,8 +47,10 @@ def sendMessage(_link, _message):
 		if data:
 			print("master has reveiced the message ", data)
 		_link.close()
+		return data
 	except:
 		print("Send message to master fail.")
+		return None
 
 def getStatus(server_ip, server_port, _message):
 	retry_code = 1
@@ -62,14 +64,16 @@ def getStatus(server_ip, server_port, _message):
 		#print("2.1")
 		message = listToStr(_message)
 		#print("2.2")
-		sendMessage(s, message)
+		data = sendMessage(s, message)
 		#print("2.3")
 		suc_code = True
 	if retry_code > 3:
 		print("get max connection time, connection abort.")
-		return "master node is done."
+		print("master node is done.")
+		return "error"
 	else:
-		return "master node is ok."
+		print("master node is ok.")
+		return data
 	
 
 #unit test
