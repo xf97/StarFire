@@ -11,6 +11,7 @@ When the primary node fails, a link to another
 child node is established by detecting the local directory
 '''
 import TalkToServer
+import socket
 
 #author = __xiaofeng__
 #date = 2019/10/30(v0.1)
@@ -39,7 +40,18 @@ def getLocation(_list):
 	return _list[:2]
 
 def linkNode(_ip, _port, _filename):
-	s = TalkToServer.getLink(_ip, _port)
+	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+	s.connect((_ip, _port))
+	s.send(_filename.encode("utf-8"))
+	info = s.recv(BUFFSIZE)
+	print(info)
+	return s
+	'''
+	except:
+		print("Connect node fail.")
+		return None
+	'''
+
 
 #unit test
 if __name__ == "__main__":
@@ -47,4 +59,5 @@ if __name__ == "__main__":
 	answer = bytesToStr(answer)
 	li = decode(answer)
 	li = getLocation(li)
-	linkNode(li[0], ANOTHER_PORT, li[1])
+	print(li)
+	linkNode(li[1], ANOTHER_PORT, li[0])

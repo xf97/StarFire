@@ -67,6 +67,7 @@ def getStatus(server_ip, server_port, _message):
 		data = sendMessage(s, message)
 		#print("2.3")
 		suc_code = True
+		s.close()
 	if retry_code > 3:
 		print("get max connection time, connection abort.")
 		print("master node is done.")
