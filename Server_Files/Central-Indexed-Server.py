@@ -1,3 +1,14 @@
+'''
+This is a project developed by MeGaCrazy (github: MeGaCrazy), 
+who opend the code on github. We noted 
+where the source code came from, u
+sed it, changed it to suit our needs, 
+and implemented our software.
+'''
+
+# author = __xiaofeng__
+# date = 2019/11/1
+
 import pickle
 import threading
 from datetime import datetime
