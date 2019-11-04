@@ -9,10 +9,19 @@ and implemented our software.
 # author = __xiaofeng__
 # date = 2019/11/1
 
+'''
+节点端修改点：
+1. 更改目录结构
+上传信息时，添加校验和这一项 done
+2. 接收主节点下发的目录结构
+3. 当主节点宕机时，使用本地的目录结构的进行通信
+'''
 
+#xf added
 import sys
 sys.path.append("..")
 from PeerListener import *
+import hashlib  #产生校验和
 
 
 class Peer_Server:  # Connect Peer with Centeral-Server
@@ -25,8 +34,10 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             if Choice == REGISTER:
                 Peer_id = input("Enter PEER ID 4 digit: ")  # Getting PEER_ID
                 self.file_name = input("Enter File name: ")  # Getting file_name will be shared
+                content = self.getContent(self.file_name)
+                md5 = self.getMd5(self.file_name, content)
                 self.Peer_port = int(Peer_id)  # Convert Peer_port to int and store as attribute
-                self.registerInServer()  # connect with server and send command to register the file
+                self.registerInServer(md5)  # connect with server and send command to register the file
                 Start_PeerListener(self.Peer_port,
                                    HOST)  # After Register The File Listen to PEER_ID Port for sharing files
             elif Choice == SEARCH:
@@ -43,14 +54,17 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 self.List_all()
 
             elif Choice == EXIT:
+                print("exit.")
                 break
+
             else:
                 continue
 
-    def registerInServer(self):  # Connect and Send command to Register
+    #overrided by xiaofeng            
+    def registerInServer(self, _md5):  # Connect and Send command to Register
         s = socket()
         s.connect((HOST, PORT))
-        data = pickle.dumps(self.Regiserdata(self.Peer_port, self.file_name))
+        data = pickle.dumps(self.Regiserdata(self.Peer_port, self.file_name, _md5))
         s.send(data)
         state = s.recv(1024)
         print(state.decode('utf-8'))  # Receive Confirmation of Registration
@@ -75,14 +89,15 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         self.print_list(ret_data[0], ret_data[1])  # Return all exiting files
         s.close()
 
-    def Regiserdata(self, Peer_port, file_name):  # for formatting the return to pickle
-        return [REGISTER, Peer_port, file_name]
+    #overrided by xiaofeng.
+    def Regiserdata(self, Peer_port, file_name, _md5):  # for formatting the return to pickle
+        return [REGISTER, Peer_port, file_name, _md5]
 
     def print_list(self, Files, keys):  # print all List
         if len(Files) > 0:
-            print("Peer_Id  |     File_name    |  Date_added :\n")
+            print("Peer_Id  |     File_name    |  Checksum | Date_added :\n")
             for item in Files:
-                print("  ", item[keys[0]], "       ", item[keys[1]], "   ", item[keys[2]])
+                print("  ", item[keys[0]], "   ", item[keys[1]], "   ", item[keys[2]], "   ", item[keys[3]])
         else:
             print("There is no file has this name Or There is no file At all\n")
 
@@ -110,6 +125,35 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         s.close()
         print('File Downloaded Successfully')
 
+    #xf added
+    #get md5 num of file
+    def getMd5(self, _filename, _content):
+        try:
+            m = hashlib.md5()
+            icontent = str(_filename + _content)
+            ucontent = icontent.encode(encoding = "utf8")
+            m.update(ucontent)
+            str_md5 = m.hexdigest()
+            return str_md5
+        except:
+            print(_filename, " md5 failed.")
+            return "md5 failed"
+
+    #xf added
+    #get file's content
+    def getContent(self, _filename):
+        #make absolute path
+        #maybe following statement is wrong
+        #file_path = os.path.join(os.getcwd(), '..')  # Organizing the path of file that will be Download
+        file_path = "..\\SharingFiles\\Uploads\\"
+        file_path = file_path + str(_filename)
+        f = open(file_path, "r", encoding = "utf-8")
+        content = f.read()
+        f.close()
+        if content:
+            return content
+        else:
+            return "File does not exist."
 
 def Start_Peer():
     peer = Peer_Server()  # Start New Peer

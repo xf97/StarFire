@@ -1,4 +1,3 @@
-
 '''
 This is a project developed by MeGaCrazy (github: MeGaCrazy), 
 who opend the code on github. We noted 
