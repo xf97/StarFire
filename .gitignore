@@ -1,3 +1,4 @@
 #The following files are not added to the repository
 test*
 /client/test*
+/unused/

@@ -19,6 +19,7 @@ and implemented our software.
 
 #xf added
 import sys
+import platform #use this library to get current os
 sys.path.append("..")
 from PeerListener import *
 import hashlib  #产生校验和
@@ -125,7 +126,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 myfile.write(data)
         s.close()
         print('File Downloaded Successfully')
-        print(file_name, "is in /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/SharingFiles/downloads")
+        print(file_name, "is in SharingFiles/downloads")
 
     #xf added
     #get md5 num of file
@@ -145,9 +146,12 @@ class Peer_Server:  # Connect Peer with Centeral-Server
     #get file's content
     def getContent(self, _filename):
         #make absolute path
-        #maybe following statement is wrong
-        #file_path = os.path.join(os.getcwd(), '..')  # Organizing the path of file that will be Download
-        file_path = "../SharingFiles/Uploads/"
+        #judge win or linux
+        #now, we couldn't support mac os
+        if "windows" in platform.system() or "Windows" in platform.system():
+            file_path = "..\\SharingFiles\\downloads\\"  # Organizing the path of file that will be Download
+        else if "Linux" in platform.system():
+            file_path = "../SharingFiles/Uploads/"
         file_path = file_path + str(_filename)
         f = open(file_path, "r", encoding = "utf-8")
         content = f.read()
