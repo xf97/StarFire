@@ -17,5 +17,8 @@ SEARCH = '2'
 DOWNLOAD = '3'
 LIST_ALL = '4'
 EXIT = '5'
-
+TIME_GAP = int(30)
+MUTEX = int(1)
+PEER1_DIR_PORT = int(1111)
+PEER2_DIR_PORT = int(2222)
 

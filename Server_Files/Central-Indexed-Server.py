@@ -62,8 +62,10 @@ class Server(threading.Thread):
             if request[0] == REGISTER:  # Register File and Send Confirmation Msg
                 print("Peer ", addr[1], " ,Add New File\n")
                 self.semaphore.acquire()
-                self.register(request[1], request[2], request[3], str(datetime.now()))
-                ret = "File Registered Successfully,"
+                if self.register(request[1], request[2], request[3], str(datetime.now())):
+                	ret = "File Registered Successfully,"
+                else:
+                	ret = "This file has already been registered in the server. Duplicate registration is not allowed."
                 conn.send(bytes(ret, 'utf-8'))
                 self.semaphore.release()
                 conn.close()
@@ -73,6 +75,7 @@ class Server(threading.Thread):
                 print("Peer ", addr[1], " ,Searching For a File\n")
                 self.semaphore.acquire()
                 #Encrypt data before sending it
+                #print(self.Search_data(request[1]))
                 ret_data = pickle.dumps(self.Search_data(request[1]))
                 conn.send(ret_data)
                 self.semaphore.release()
@@ -94,13 +97,19 @@ class Server(threading.Thread):
 
     def register(self, peer_id, file_name, _md5, Date):  # Store all Files in format
         entry = [str(peer_id), file_name, str(_md5), str(Date)]  # peer_id', 'file_name', 'Checksum', 'Date_added'
+        #search file, if file's checksum and filename as same as another one.
+        #don't register
+        for item in self.Files:
+        	if item["file_name"] == file_name and item["Checksum"] == _md5:
+        		return False
         self.Files.insert(0, dict(zip(self.keys, entry)))
+        return True
 
     def Search_data(self, file_name):  # Return File Match name we Search For
         ret = []
         for item in self.Files:
             if item['file_name'] == file_name:
-                entry = [item['peer_id'], item['file_name'], item['checksum'], item['Date_added']]
+                entry = [item['peer_id'], item['file_name'], item['Checksum'], item['Date_added']]
                 ret.insert(0, dict(zip(self.keys, entry)))
         return ret, self.keys
 

@@ -55,12 +55,13 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 self.List_all()
 
             elif Choice == EXIT:
-                print("exit.")
+                input("enter once to quit.")
                 break
+
             else:
                 print("Wrong choice. please enter another rigth choice.")
                 continue
-        input("enter once to quit.")
+        return
 
     #overrided by xiaofeng            
     def registerInServer(self, _md5):  # Connect and Send command to Register
@@ -150,12 +151,16 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         #now, we couldn't support mac os
         if "windows" in platform.system() or "Windows" in platform.system():
             file_path = "..\\SharingFiles\\downloads\\"  # Organizing the path of file that will be Download
-        else if "Linux" in platform.system():
+        elif "Linux" in platform.system():
             file_path = "../SharingFiles/Uploads/"
         file_path = file_path + str(_filename)
-        f = open(file_path, "r", encoding = "utf-8")
-        content = f.read()
-        f.close()
+        try:
+            f = open(file_path, "r", encoding = "utf-8")
+            content = f.read()
+            f.close()
+        except:
+            content = None
+            print(file_path, " doesn't exist.")
         if content:
             return content
         else:
