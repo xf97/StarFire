@@ -1,3 +1,4 @@
+#! /usr/bin/python
 '''
 This is a project developed by MeGaCrazy (github: MeGaCrazy), 
 who opend the code on github. We noted 
@@ -7,22 +8,23 @@ and implemented our software.
 '''
 
 # author = __xiaofeng__
-# date = 2019/11/1
+# date = 2019/12/2
+
+
+#system: ubuntu 18.04
 
 '''
-服务器端修改点：
-1. 更改目录结构
-现有目录结构 = [节点id, 文件名, 添加日期]
-更改为 目录结构 = [节点id, 文件名, 校验和, 添加日期] done
-
-2. 添加下发文件功能
-间隔时间, 每隔30秒
+Server-side modification points:
+1. Change the directory structure
+Existing directory structure = [node id, file name, add date]
+Change to directory structure = [node id, file name, checksum, add date] done
+2. Add the function interval of distributing files, every 30 seconds
 '''
 
 
-#数据持久性存储
+# data persistence store
 import pickle
-#多线程库		
+# multithreading library
 import threading
 from datetime import datetime
 from socket import *
@@ -37,10 +39,10 @@ from Constants.Constant import *
 
 class Server(threading.Thread):
     def __init__(self, port, host, max_connection):
-    	#初始化线程
+    	#Initialize the thread
         threading.Thread.__init__(self)
         self.host = 'localhost'
-        #信号量
+        #semaphore
         self.semaphore = Semaphore(max_connection)  # For Handling threads synchronization
         self.port = 5555  # this port it will listen to
         self.sock = socket()
@@ -54,7 +56,7 @@ class Server(threading.Thread):
         while True:
             conn, addr = self.sock.accept()
             print("Got Connection From ", addr[0], " : ", addr[1])
-            #解码客户端发来的数据
+            #Decode the data sent by the client
             request = pickle.loads(conn.recv(1024)) 
 
             if request[0] == REGISTER:  # Register File and Send Confirmation Msg
@@ -70,7 +72,7 @@ class Server(threading.Thread):
             elif request[0] == SEARCH:  # Search for File_Name and return List of Files That Match the name
                 print("Peer ", addr[1], " ,Searching For a File\n")
                 self.semaphore.acquire()
-                #发送数据前先加密
+                #Encrypt data before sending it
                 ret_data = pickle.dumps(self.Search_data(request[1]))
                 conn.send(ret_data)
                 self.semaphore.release()
@@ -109,7 +111,7 @@ class Server(threading.Thread):
 def Start_Server():
     print("Welcome!!..CENTRAL INDEX SERVER IS UP AND RUNNING.\n")
     server = Server(HOST, PORT, 5)  # Start the Central Server
-    server.start() #启动线程
+    server.start() #start thread
 
 
 if __name__ == '__main__':

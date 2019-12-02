@@ -30,8 +30,16 @@ class PeerListener(threading.Thread):
         self.semaphore = Semaphore(max_connection)  # For Handling threads synchronization
         self.port = port  # this port it will listen to
         self.sock = socket()
-        self.sock.bind((self.host, self.port))  # bind socket to address
-        self.sock.listen(max_connection)
+        #不能重复绑定，添加异常捕获，
+        #重复绑定时，捕获异常，偏移端口
+        try:
+            self.sock.bind((self.host, self.port))  # bind socket to address
+            self.sock.listen(max_connection)
+        except:
+            new_port = hash(str(self.port)) % 10000
+            self.sock.bind((self.host, new_port))  # bind socket to address
+            self.sock.listen(max_connection)
+            print("The port is already in use. we change your port to another one: ", new_port)
 
     def run(self):
         print("And This Peer is Ready For Sharing his File\n")

@@ -56,9 +56,10 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             elif Choice == EXIT:
                 print("exit.")
                 break
-
             else:
+                print("Wrong choice. please enter another rigth choice.")
                 continue
+        input("enter once to quit.")
 
     #overrided by xiaofeng            
     def registerInServer(self, _md5):  # Connect and Send command to Register
@@ -124,6 +125,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 myfile.write(data)
         s.close()
         print('File Downloaded Successfully')
+        print(file_name, "is in /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/SharingFiles/downloads")
 
     #xf added
     #get md5 num of file
@@ -145,7 +147,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         #make absolute path
         #maybe following statement is wrong
         #file_path = os.path.join(os.getcwd(), '..')  # Organizing the path of file that will be Download
-        file_path = "..\\SharingFiles\\Uploads\\"
+        file_path = "../SharingFiles/Uploads/"
         file_path = file_path + str(_filename)
         f = open(file_path, "r", encoding = "utf-8")
         content = f.read()
