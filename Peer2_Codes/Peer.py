@@ -24,16 +24,21 @@ sys.path.append("..")
 from PeerListener import *
 import hashlib  #产生校验和
 
+#节点号
+PEER_ID = "0002"
+
 
 class Peer_Server:  # Connect Peer with Centeral-Server
     def __init__(self):
         print("WELCOME TO PEER TO PEER SHARING FILE SYSTEM\n")
+        print("*" * 10, "This is Peer" + PEER_ID[-1:] + " ", "*" * 10)
         while True:
             # Getting Choice From Peer
             Choice = input("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)EXIT\n")
 
             if Choice == REGISTER:
-                Peer_id = input("Enter PEER ID 4 digit: ")  # Getting PEER_ID
+                #Peer_id = input("Enter PEER ID 4 digit: ")  # Getting PEER_ID
+                Peer_id = PEER_ID
                 self.file_name = input("Enter File name: ")  # Getting file_name will be shared
                 content = self.getContent(self.file_name)
                 md5 = self.getMd5(self.file_name, content)
@@ -114,7 +119,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         s.send(data)
 
         file_path = os.path.join(os.getcwd(), '..')  # Organizing the path of file that will be Download
-        file_path = os.path.join(file_path, 'SharingFiles')
+        file_path = os.path.join(file_path, "Peer" + PEER_ID[-1:] + 'Files')
         file_path = os.path.join(file_path, "downloads")
 
         with open(os.path.join(file_path, file_name),  # writing to file
@@ -127,7 +132,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 myfile.write(data)
         s.close()
         print('File Downloaded Successfully')
-        print(file_name, "is in SharingFiles/downloads")
+        print(file_name, "is in /Peer", PEER_ID[-1:] + "Files/downloads")
 
     #xf added
     #get md5 num of file
@@ -150,9 +155,9 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         #judge win or linux
         #now, we couldn't support mac os
         if "windows" in platform.system() or "Windows" in platform.system():
-            file_path = "..\\SharingFiles\\downloads\\"  # Organizing the path of file that will be Download
+            file_path = "..\\Peer" + PEER_ID[-1:] +"Files\\Uploads\\"  # Organizing the path of file that will be Download
         elif "Linux" in platform.system():
-            file_path = "../SharingFiles/Uploads/"
+            file_path = "../Peer" + PEER_ID[-1:] + "Files/Uploads/"
         file_path = file_path + str(_filename)
         try:
             f = open(file_path, "r", encoding = "utf-8")

@@ -15,12 +15,15 @@ import pickle
 import threading
 from socket import *
 from threading import Semaphore
+import platform
 
 #xf added
 import sys
 sys.path.append("..")
 
 from Constants.Constant import *
+
+PEER_ID = "0001"
 
 
 class PeerListener(threading.Thread):
@@ -48,11 +51,17 @@ class PeerListener(threading.Thread):
             print("Got Connection From ", addr[0], " : ", addr[1])
             request = pickle.loads(conn.recv(1024))
             if request[0] == DOWNLOAD:  # Organizing the path of file that will be shared
+                '''
                 file_path = os.path.join(os.getcwd(), '..')
-                file_path = os.path.join(file_path, 'SharingFiles')
+                file_path = os.path.join(file_path,  "Peer" + PEER_ID[-1:] + 'Files')
                 file_path = os.path.join(file_path, "Uploads")
+                '''
                 file_name = request[1]
-                Full_path = os.path.join(file_path, file_name)
+                if "windows" in platform.system() or "Windows" in platform.system():
+                    file_path = "..\\Peer" + PEER_ID[-1:] +"Files\\Uploads\\" + file_name  # Organizing the path of file that will be Download
+                elif "Linux" in platform.system():
+                    file_path = "../Peer" + PEER_ID[-1:] + "Files/Uploads/" +file_name
+                Full_path = file_name
                 self.semaphore.acquire()
 
                 with open(Full_path, "rb") as myfile:       # Start Transfer File to Other Peer

@@ -11,17 +11,15 @@ import pickle
 import socket
 import sys
 import platform
-from threading import *
 
 sys.path.append("../")
 
 from Constants.Constant import *
 
 
-class OpeDir(threading.Thread):
+class OpeDir():
 	def __init__(self):
-		#Initialize the thread
-        threading.Thread.__init__(self)
 		self.timeGap = TIME_GAP
 		#semaphore
-        self.semaphore = Semaphore(MUTEX) 
+        self.semaphore = Semaphore(MUTEX)
+

@@ -29,6 +29,7 @@ import threading
 from datetime import datetime
 from socket import *
 from threading import *
+import time #Timing module
 
 #xf added
 import sys
@@ -57,7 +58,7 @@ class Server(threading.Thread):
             conn, addr = self.sock.accept()
             print("Got Connection From ", addr[0], " : ", addr[1])
             #Decode the data sent by the client
-            request = pickle.loads(conn.recv(1024)) 
+            request = pickle.loads(conn.recv(1024))
 
             if request[0] == REGISTER:  # Register File and Send Confirmation Msg
                 print("Peer ", addr[1], " ,Add New File\n")
@@ -117,10 +118,16 @@ class Server(threading.Thread):
         return self.Files, self.keys
 
 
+
 def Start_Server():
     print("Welcome!!..CENTRAL INDEX SERVER IS UP AND RUNNING.\n")
     server = Server(HOST, PORT, 5)  # Start the Central Server
-    server.start() #start thread
+    server.start() #start thread, as same as server.run() but run in another thread
+    distrubuteDir()
+
+def distrubuteDir():
+    print(time.time())
+    threading.Timer(TIME_GAP, distrubuteDir).start()
 
 
 if __name__ == '__main__':
