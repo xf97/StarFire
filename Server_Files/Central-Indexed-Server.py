@@ -126,7 +126,7 @@ def Start_Server():
     distrubuteDir()
 
 def distrubuteDir():
-    print(time.time())
+    print("Time 30 seconds, current time: ", time.time())
     threading.Timer(TIME_GAP, distrubuteDir).start()
 
 
