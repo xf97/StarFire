@@ -76,7 +76,7 @@ class PeerListener(threading.Thread):
                             break
                 self.semaphore.release()
                 print('File Sent')
-                print("Please make another choice: ")
+                print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)EXIT")
             else:
                 continue
 

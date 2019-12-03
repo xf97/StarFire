@@ -23,6 +23,7 @@ import platform #use this library to get current os
 sys.path.append("..")
 from PeerListener import *
 import hashlib  #产生校验和
+import os
 
 #节点号
 PEER_ID = "0001"
@@ -35,7 +36,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         print("*" * 10, "This is Peer" + PEER_ID[-1:] + " ", "*" * 10)
         while True:
             # Getting Choice From Peer
-            Choice = input("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)EXIT\n")
+            Choice = input("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
 
             if Choice == REGISTER:
                 #Peer_id = input("Enter PEER ID 4 digit: ")  # Getting PEER_ID
@@ -53,6 +54,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
 
             elif Choice == DOWNLOAD:
                 Peer_id = input("Enter PEER ID 4 digit: ")  # Taking PEER_ID and file_name i want to Download file from
+                while Peer_id == PEER_ID:
+                    Peer_id = input("You cannot download the local file, please enter another node ID: ")
                 file_name = input("Enter File name: ")
                 self.Download(int(Peer_id), file_name)
 
@@ -63,6 +66,9 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             elif Choice == EXIT:
                 input("enter once to quit.")
                 break
+
+            elif Choice == LIST_LOCAL_FILES:
+                self.getLocalFiles()
 
             else:
                 print("Wrong choice. please enter another rigth choice.")
@@ -171,6 +177,19 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             return content
         else:
             return "File does not exist."
+
+    def getLocalFiles(self):
+        if "windows" in platform.system() or "Windows" in platform.system():
+            file_path = "..\\Peer" + PEER_ID[-1:] +"Files\\Uploads\\"  # Organizing the path of file that will be Download
+        elif "Linux" in platform.system():
+            file_path = "../Peer" + PEER_ID[-1:] + "Files/Uploads/"
+        localFiles = os.listdir(file_path)
+        print("file name:")
+        for i in localFiles:
+            print(i)
+        print()
+        print("It's over. You can't share files that don't already exist on your computer. If you want to share new files, just copy them to uploads folder.")
+
 
 def Start_Peer():
     peer = Peer_Server()  # Start New Peer
