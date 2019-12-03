@@ -29,6 +29,7 @@ PEER_ID = "0001"
 class PeerListener(threading.Thread):
     def __init__(self, port, host, max_connection):
         threading.Thread.__init__(self)
+        #threading.Thread.setDaemon(True)
         self.host = host
         self.semaphore = Semaphore(max_connection)  # For Handling threads synchronization
         self.port = port  # this port it will listen to
@@ -83,4 +84,5 @@ class PeerListener(threading.Thread):
 
 def Start_PeerListener(port, host):
     peer = PeerListener(port, host, 5)  # Start Thread listen to peer_id to share the files with others Peers
+    peer.setDaemon(True)    #设置本线程为守护线程，当主线程退出时一起退出
     peer.start()
