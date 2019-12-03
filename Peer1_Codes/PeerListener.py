@@ -61,7 +61,7 @@ class PeerListener(threading.Thread):
                     file_path = "..\\Peer" + PEER_ID[-1:] +"Files\\Uploads\\" + file_name  # Organizing the path of file that will be Download
                 elif "Linux" in platform.system():
                     file_path = "../Peer" + PEER_ID[-1:] + "Files/Uploads/" +file_name
-                Full_path = file_name
+                Full_path = file_path
                 self.semaphore.acquire()
 
                 with open(Full_path, "rb") as myfile:       # Start Transfer File to Other Peer
@@ -76,6 +76,7 @@ class PeerListener(threading.Thread):
                             break
                 self.semaphore.release()
                 print('File Sent')
+                print("Please make another choice: ")
             else:
                 continue
 
