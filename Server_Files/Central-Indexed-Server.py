@@ -123,11 +123,27 @@ def Start_Server():
     print("Welcome!!..CENTRAL INDEX SERVER IS UP AND RUNNING.\n")
     server = Server(HOST, PORT, 5)  # Start the Central Server
     server.start() #start thread, as same as server.run() but run in another thread
-    distrubuteDir()
+    distrubuteDir(server.all_data()[0])
 
-def distrubuteDir():
-    print("Time 30 seconds, current time: ", time.time())
-    threading.Timer(TIME_GAP, distrubuteDir).start()
+def distrubuteDir(_Files):
+    if len(_Files) != 0:
+        print("Time 30 seconds")
+        index = 1
+        for i in _Files:
+            #获取每个节点监听的端口
+            i_port = i["peer_id"]
+            i_socket = socket() #获取socket对象
+            i_socket.connect((HOST, int(i_port)))    #创建到各个节点的连接
+            #加密数据
+            file_data = pickle.dumps(_Files)
+            i_socket.send(file_data)
+            print("\rDelivery schedule: ", round(float(index) / len(_Files), 2), end = " ") #进度条
+            i_socket.close()
+            index += 1
+    else:
+        print("The directory is empty and no data is sent.")
+    print()
+    threading.Timer(TIME_GAP, distrubuteDir, (_Files,)).start()
 
 
 if __name__ == '__main__':

@@ -43,11 +43,15 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 Peer_id = PEER_ID
                 self.file_name = input("Enter File name: ")  # Getting file_name will be shared
                 content = self.getContent(self.file_name)
-                md5 = self.getMd5(self.file_name, content)
-                self.Peer_port = int(Peer_id)  # Convert Peer_port to int and store as attribute
-                self.registerInServer(md5)  # connect with server and send command to register the file
-                Start_PeerListener(self.Peer_port,
+                if content == "File does not exist.":
+                    print("Stop this registration.")
+                else:
+                    md5 = self.getMd5(self.file_name, content)
+                    self.Peer_port = int(Peer_id)  # Convert Peer_port to int and store as attribute
+                    self.registerInServer(md5)  # connect with server and send command to register the file
+                    Start_PeerListener(self.Peer_port,
                                    HOST)  # After Register The File Listen to PEER_ID Port for sharing files
+                    
             elif Choice == SEARCH:
                 self.SearchInServer()  # Connect with server and send command to search for file name
 
