@@ -132,14 +132,18 @@ def distrubuteDir(_Files):
         for i in _Files:
             #获取每个节点监听的端口
             i_port = i["peer_id"]
-            i_socket = socket() #获取socket对象
-            i_socket.connect((HOST, int(i_port)))    #创建到各个节点的连接
-            #加密数据
-            file_data = pickle.dumps(_Files)
-            i_socket.send(file_data)
-            print("\rDelivery schedule: ", round(float(index) / len(_Files), 2), end = " ") #进度条
-            i_socket.close()
-            index += 1
+            try:
+                i_socket = socket() #获取socket对象
+                i_socket.connect((HOST, int(i_port)))    #创建到各个节点的连接
+                #加密数据
+                file_data = pickle.dumps(_Files)
+                i_socket.send(file_data)
+                print("\rDelivery schedule: ", round(float(index) / len(_Files), 2), end = " ") #进度条
+                i_socket.close()
+                index += 1
+            except:
+                print("\rDelivery schedule: ", round(float(index) / len(_Files), 2), end = " ") #进度条
+                index += 1  #如果连接节点发生异常，保持正常运行
     else:
         print("The directory is empty and no data is sent.")
     print()

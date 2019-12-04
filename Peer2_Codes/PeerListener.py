@@ -79,10 +79,15 @@ class PeerListener(threading.Thread):
                 print('File Sent')
                 print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)EXIT")
             else:
-                continue
+                print("I got the directory.")
+                #持久保存在本地
+                with open("dir.data", "wb") as file:
+                    pickle.dump(request, file)
+                print("Local directory caching is complete. ", len(request))
+
 
 
 def Start_PeerListener(port, host):
     peer = PeerListener(port, host, 5)  # Start Thread listen to peer_id to share the files with others Peers
-    peer.setDaemon(True)     #设置本线程为守护线程，当主线程退出时一起退出
+    peer.setDaemon(True)    #设置本线程为守护线程，当主线程退出时一起退出
     peer.start()

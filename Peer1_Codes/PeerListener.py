@@ -26,6 +26,7 @@ from Constants.Constant import *
 PEER_ID = "0001"
 
 
+
 class PeerListener(threading.Thread):
     def __init__(self, port, host, max_connection):
         threading.Thread.__init__(self)
@@ -79,7 +80,12 @@ class PeerListener(threading.Thread):
                 print('File Sent')
                 print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)EXIT")
             else:
-                continue
+                print("I got the directory.")
+                #持久保存在本地
+                with open("dir.data", "wb") as file:
+                    pickle.dump(request, file)
+                print("Local directory caching is complete. ", len(request))
+
 
 
 def Start_PeerListener(port, host):

@@ -51,7 +51,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                     self.registerInServer(md5)  # connect with server and send command to register the file
                     Start_PeerListener(self.Peer_port,
                                    HOST)  # After Register The File Listen to PEER_ID Port for sharing files
-
+                    
             elif Choice == SEARCH:
                 self.SearchInServer()  # Connect with server and send command to search for file name
 
@@ -118,7 +118,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             for item in Files:
                 print("  ", item[keys[0]], "   ", item[keys[1]], "   ", item[keys[2]], "   ", item[keys[3]])
         else:
-            print("There is no file has this name Or There is no file at all\n")
+            print("There is no file has this name Or There is no file At all\n")
 
     def SearchData(self, file_name):  # Command for Search contains file_name, SEARCH indicator command
         return [SEARCH, file_name]
