@@ -42,10 +42,13 @@ class PeerListener(threading.Thread):
             self.sock.bind((self.host, self.port))  # bind socket to address
             self.sock.listen(max_connection)
         except:
+            '''
             new_port = hash(str(self.port)) % 10000
             self.sock.bind((self.host, new_port))  # bind socket to address
             self.sock.listen(max_connection)
-            print("The port is already in use. we change your port to another one: ", new_port)
+            '''
+            #print("The port is already in use. we change your port to another one: ", new_port)
+            print("This port is already listening.")
 
     def run(self):
         print("And This Peer is Ready For Sharing his File\n")

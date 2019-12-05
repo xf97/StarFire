@@ -2,3 +2,5 @@
 test*
 /client/test*
 /unused/
+/Peer1_Codes/*.data
+/Peer2_Codes/*.data
