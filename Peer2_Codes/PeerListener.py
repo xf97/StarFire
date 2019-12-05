@@ -17,6 +17,7 @@ from socket import *
 from threading import Semaphore
 import platform
 import time as TIME
+from OpeDir import OpeDir
 
 #xf added
 import sys
@@ -86,9 +87,11 @@ class PeerListener(threading.Thread):
                 print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
             elif request[0] == REGISTER_CLIENT:
                 print("client register")
-                print(request)
+                od =OpeDir()
+                od.insertRecord(request)
+                #print(request)
             else:
-                print("Get the directory.")
+                print("I got the directory.")
                 #持久保存在本地
                 with open("dir.data", "wb") as file:
                     pickle.dump(request, file)

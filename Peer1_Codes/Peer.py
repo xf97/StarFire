@@ -25,6 +25,7 @@ from PeerListener import *
 import hashlib  #产生校验和
 import os
 import time as TIME
+from OpeDir import OpeDir
 
 #节点号
 PEER_ID = "0001"
@@ -105,18 +106,20 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         #读取本地目录文件
         dir = self.getDirectory()
         #向目录中除了本节点外的其他客户端节点发送消息
-        self.registerToOtherNodes(dir, self.Regiserdata(self.Peer_port, self.file_name, _md5))
+        self.registerToOtherNodes(dir, self.Peer_port, self.file_name, _md5)
 
-    def registerToOtherNodes(self, _dir, _infor):
+    def registerToOtherNodes(self, _dir, _port, _filename, _md5):
         index = 0
+        #print(str(_infor[0]))
         for i in _dir:
-            if i["peer_id"] == str(_infor[0]):
+            #print(i)
+            if i["peer_id"] == str(_port):
                 #跳过本节点
                 continue
             else:
                 #组装数据，发送信息
                 msgHead = REGISTER_CLIENT
-                data = [msgHead, _infor[0], _infor[1], _infor[2]]
+                data = [msgHead, _port, _filename, _md5]
                 data = pickle.dumps(data)
                 s = socket()
                 s.connect((HOST, int(i["peer_id"])))
@@ -259,7 +262,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 print("Successfully connect to server")
             except:
                 print("Connection to server failed. Reconnect after 5 seconds...")
-                TIME.sleep(5)   #等待5秒
+                #TIME.sleep(5)   #等待5秒
                 time += 1
         if flag:
             return s 
@@ -271,6 +274,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         print("Read local directory...")
         with open("dir.data", "rb") as file:
             dir = pickle.load(file)
+        #print(type(dir[0]))
         return dir
 
 
