@@ -24,11 +24,15 @@ sys.path.append("..")
 from PeerListener import *
 import hashlib  #产生校验和
 import os
+import time as TIME
 
 #节点号
 PEER_ID = "0001"
 
-
+'''
+The server is not detected until there is a need to interact with the server, 
+and it is determined that the server is down after several failed connections.
+'''
 
 class Peer_Server:  # Connect Peer with Centeral-Server
     def __init__(self):
@@ -81,8 +85,15 @@ class Peer_Server:  # Connect Peer with Centeral-Server
 
     #overrided by xiaofeng            
     def registerInServer(self, _md5):  # Connect and Send command to Register
+        '''
         s = socket()
         s.connect((HOST, PORT))
+        '''
+        s = self.detectServer(HOST, PORT)
+        if s == None:
+            s.close()
+            print("System has switched to distributed mode.")
+            return 
         data = pickle.dumps(self.Regiserdata(self.Peer_port, self.file_name, _md5))
         s.send(data)
         state = s.recv(1024)
@@ -193,6 +204,28 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             print(i)
         print()
         print("It's over. You can't share files that don't already exist on your computer. If you want to share new files, just copy them to uploads folder.")
+
+    def detectServer(self, _host, _port):
+        s = socket()
+        time = 1
+        flag = False #连接成功标志
+        while flag == False and time <= DETECT_TIME:
+            s = socket()
+            try:
+                print("Connecting to server...")
+                s.connect((_host, _port))
+                flag = True
+                time += 1
+                print("Successfully connect to server")
+            except:
+                print("Connection to server failed. Reconnect after 5 seconds...")
+                TIME.sleep(5)   #等待5秒
+                time += 1
+        if flag:
+            return s 
+        else:
+            print("The maximum number of retries is reached and the connection to the server fails. Switch to distributed mode....")
+            return None
 
 
 def Start_Peer():

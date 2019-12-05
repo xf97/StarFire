@@ -16,6 +16,7 @@ import threading
 from socket import *
 from threading import Semaphore
 import platform
+import time as TIME
 
 #xf added
 import sys
@@ -24,6 +25,11 @@ sys.path.append("..")
 from Constants.Constant import *
 
 PEER_ID = "0002"
+
+'''
+The server is not detected until there is a need to interact with the server, 
+and it is determined that the server is down after several failed connections.
+'''
 
 
 class PeerListener(threading.Thread):

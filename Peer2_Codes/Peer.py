@@ -194,6 +194,28 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         print()
         print("It's over. You can't share files that don't already exist on your computer. If you want to share new files, just copy them to uploads folder.")
 
+    def detectServer(self, _host, _port):
+        s = socket()
+        time = 1
+        flag = False #连接成功标志
+        while flag == False and time <= DETECT_TIME:
+            s = socket()
+            try:
+                print("Connecting to server...")
+                s.connect((_host, _port))
+                flag = True
+                time += 1
+                print("Successfully connect to server")
+            except:
+                print("Connection to server failed. Reconnect after 5 seconds...")
+                TIME.sleep(5)   #等待5秒
+                time += 1
+        if flag:
+            return s 
+        else:
+            print("The maximum number of retries is reached and the connection to the server fails. Switch to distributed mode....")
+            return None
+
 
 def Start_Peer():
     peer = Peer_Server()  # Start New Peer
