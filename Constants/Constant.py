@@ -20,4 +20,5 @@ EXIT = '6'
 LIST_LOCAL_FILES = '5'
 TIME_GAP = int(30)
 DETECT_TIME = int(3)
+REGISTER_CLIENT = "clientRegister"
 

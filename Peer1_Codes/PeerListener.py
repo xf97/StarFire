@@ -78,7 +78,10 @@ class PeerListener(threading.Thread):
                             break
                 self.semaphore.release()
                 print('File Sent')
-                print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)EXIT")
+                print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
+            elif request[0] == REGISTER_CLIENT:
+                print("client register")
+                print(request)
             else:
                 print("I got the directory.")
                 #持久保存在本地

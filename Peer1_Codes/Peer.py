@@ -34,6 +34,7 @@ The server is not detected until there is a need to interact with the server,
 and it is determined that the server is down after several failed connections.
 '''
 
+
 class Peer_Server:  # Connect Peer with Centeral-Server
     def __init__(self):
         print("WELCOME TO PEER TO PEER SHARING FILE SYSTEM\n")
@@ -91,8 +92,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         '''
         s = self.detectServer(HOST, PORT)
         if s == None:
-            s.close()
             print("System has switched to distributed mode.")
+            self.registerInDistributed(_md5)
             return 
         data = pickle.dumps(self.Regiserdata(self.Peer_port, self.file_name, _md5))
         s.send(data)
@@ -100,9 +101,40 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         print(state.decode('utf-8'))  # Receive Confirmation of Registration
         s.close()
 
+    def registerInDistributed(self, _md5):
+        #读取本地目录文件
+        dir = self.getDirectory()
+        #向目录中除了本节点外的其他客户端节点发送消息
+        self.registerToOtherNodes(dir, self.Regiserdata(self.Peer_port, self.file_name, _md5))
+
+    def registerToOtherNodes(self, _dir, _infor):
+        index = 0
+        for i in _dir:
+            if i["peer_id"] == str(_infor[0]):
+                #跳过本节点
+                continue
+            else:
+                #组装数据，发送信息
+                msgHead = REGISTER_CLIENT
+                data = [msgHead, _infor[0], _infor[1], _infor[2]]
+                data = pickle.dumps(data)
+                s = socket()
+                s.connect((HOST, int(i["peer_id"])))
+                s.send(data)
+                s.close()
+                index += 1
+                print("Register speed: ", index)
+
     def SearchInServer(self):  # Connect and Send command  to Server for Specific File_name
+        '''
         s = socket()
         s.connect((HOST, PORT))
+        '''
+        s = self.detectServer(HOST, PORT)
+        if s == None:
+            s.close()
+            print("System has switched to distributed mode.")
+            return 
         file_name = input("Enter File Name : ")
         data = pickle.dumps(self.SearchData(file_name))
         s.send(data)
@@ -111,8 +143,15 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         s.close()
 
     def List_all(self):  # Connect and Send command to Server to Show all Exiting Files
+        '''
         s = socket()
         s.connect((HOST, PORT))
+        '''
+        s = self.detectServer(HOST, PORT)
+        if s == None:
+            s.close()
+            print("System has switched to distributed mode.")
+            return 
         data = pickle.dumps(str(LIST_ALL))
         s.send(data)
         ret_data = pickle.loads(s.recv(1024))
@@ -120,6 +159,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         s.close()
 
     #overrided by xiaofeng.
+    #该函数为了打包数据
     def Regiserdata(self, Peer_port, file_name, _md5):  # for formatting the return to pickle
         return [REGISTER, Peer_port, file_name, _md5]
 
@@ -224,8 +264,14 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         if flag:
             return s 
         else:
-            print("The maximum number of retries is reached and the connection to the server fails. Switch to distributed mode....")
+            print("The maximum number of retries is reached and the connection to the server fails.Switch to distributed mode....")
             return None
+
+    def getDirectory(self):
+        print("Read local directory...")
+        with open("dir.data", "rb") as file:
+            dir = pickle.load(file)
+        return dir
 
 
 def Start_Peer():
