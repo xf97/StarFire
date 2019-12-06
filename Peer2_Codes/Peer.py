@@ -136,7 +136,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 print("Register speed: ", index)
                 port_set.add(i["peer_id"])
 
-    def SearchInServer(self, flag):  # Connect and Send command  to Server for Specific File_name
+    def SearchInServer(self, _flag):  # Connect and Send command  to Server for Specific File_name
         '''
         s = socket()
         s.connect((HOST, PORT))
@@ -147,7 +147,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             return 
         s = self.detectServer(HOST, PORT)
         if s == None:
-            flag = False
+            self.flag = False
             print("System has switched to distributed mode.")
             self.searchInDistributed()
             return 
@@ -164,21 +164,30 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         od = OpeDir()
         od.searchRecord(file_name)
 
-    def List_all(self):  # Connect and Send command to Server to Show all Exiting Files
+    def List_all(self, _flag):  # Connect and Send command to Server to Show all Exiting Files
         '''
         s = socket()
         s.connect((HOST, PORT))
         '''
+        if not _flag:
+            print("System has switched to distributed mode.")
+            self.List_all_distrubuted()
+            return 
         s = self.detectServer(HOST, PORT)
         if s == None:
-            s.close()
             print("System has switched to distributed mode.")
+            self.List_all_distrubuted()
+            sel.flag = False
             return 
         data = pickle.dumps(str(LIST_ALL))
         s.send(data)
         ret_data = pickle.loads(s.recv(1024))
         self.print_list(ret_data[0], ret_data[1])  # Return all exiting files
         s.close()
+
+    def List_all_distrubuted(self):
+        od = OpeDir()
+        od.listAll()
 
     #overrided by xiaofeng.
     #该函数为了打包数据
