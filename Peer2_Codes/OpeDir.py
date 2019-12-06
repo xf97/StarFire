@@ -17,6 +17,10 @@ class OpeDir:
 		with open(self.filename, "rb") as file:
 			self.dir = pickle.load(file)
 
+	def updateDir(self):
+		with open(self.filename, "rb") as file:
+			self.dir = pickle.load(file)
+
 	def insertRecord(self, _record):
 		peer_md5 = self.getAllMd5()
 		if _record[3] in peer_md5:
@@ -55,4 +59,12 @@ class OpeDir:
 				print("  ", item["peer_id"], "   ", item["file_name"], "   ", item["Checksum"], "   ", item["Date_added"])
 		else:
 			print("There is no file has this name or there is no file in server at all\n")
+		return
+
+	def listAll(self):
+		print("Updating local data...")
+		self.updateDir()	#更新目录数据
+		print("Peer_Id  |		file_name 	|  Checksum 	| Date_added:\n")
+		for i in self.dir:
+			print("   ", i["peer_id"], "   ", i["file_name"], "   ", i["Checksum"], "   ", i["Date_added"])
 		return

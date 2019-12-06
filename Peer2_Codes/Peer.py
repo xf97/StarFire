@@ -72,7 +72,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
 
 
             elif Choice == LIST_ALL:  # SHOW ALL Sharing files that registered in Server
-                self.List_all()
+                self.List_all(self.flag)
 
             elif Choice == EXIT:
                 input("enter once to quit.")
@@ -177,7 +177,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         if s == None:
             print("System has switched to distributed mode.")
             self.List_all_distrubuted()
-            sel.flag = False
+            self.flag = False
             return 
         data = pickle.dumps(str(LIST_ALL))
         s.send(data)
