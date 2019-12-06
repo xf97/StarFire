@@ -47,6 +47,8 @@ class OpeDir:
 		return s
 
 	def searchRecord(self, file_name):
+		print("Updating local data...")
+		self.updateDir()	#更新目录数据
 		results = list()
 		for i in self.dir:
 			if i["file_name"] == file_name:

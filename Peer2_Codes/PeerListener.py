@@ -33,6 +33,7 @@ and it is determined that the server is down after several failed connections.
 '''
 
 
+
 class PeerListener(threading.Thread):
     def __init__(self, port, host, max_connection):
         threading.Thread.__init__(self)
@@ -47,10 +48,13 @@ class PeerListener(threading.Thread):
             self.sock.bind((self.host, self.port))  # bind socket to address
             self.sock.listen(max_connection)
         except:
+            '''
             new_port = hash(str(self.port)) % 10000
             self.sock.bind((self.host, new_port))  # bind socket to address
             self.sock.listen(max_connection)
-            print("The port is already in use. we change your port to another one: ", new_port)
+            '''
+            #print("The port is already in use. we change your port to another one: ", new_port)
+            print("This port is already listening.")
 
     def run(self):
         print("And This Peer is Ready For Sharing his File\n")
@@ -87,7 +91,7 @@ class PeerListener(threading.Thread):
                 print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
             elif request[0] == REGISTER_CLIENT:
                 print("client register")
-                od =OpeDir()
+                od = OpeDir()
                 od.insertRecord(request)
                 #print(request)
             else:

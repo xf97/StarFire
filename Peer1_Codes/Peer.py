@@ -39,55 +39,59 @@ and it is determined that the server is down after several failed connections.
 class Peer_Server:  # Connect Peer with Centeral-Server
     def __init__(self):
         print("WELCOME TO PEER TO PEER SHARING FILE SYSTEM\n")
+        print("-" * 15 ,"Only after registration can you join the network", "-" * 15)
         print("*" * 10, "This is Peer" + PEER_ID[-1:] + " ", "*" * 10)
         self.portMutex = 0
         self.flag = True    #服务器健全标志
         while True:
-            # Getting Choice From Peer
-            Choice = input("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
+            try:
+                # Getting Choice From Peer
+                Choice = input("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
 
-            if Choice == REGISTER:
-                #Peer_id = input("Enter PEER ID 4 digit: ")  # Getting PEER_ID
-                Peer_id = PEER_ID
-                self.file_name = input("Enter File name: ")  # Getting file_name will be shared
-                content = self.getContent(self.file_name)
-                if content == "File does not exist.":
-                    print("Stop this registration.")
-                else:
-                    md5 = self.getMd5(self.file_name, content)
-                    self.Peer_port = int(Peer_id)  # Convert Peer_port to int and store as attribute
-                    self.registerInServer(md5, self.flag)  # connect with server and send command to register the file
-                    if self.portMutex == 0:
-                        Start_PeerListener(self.Peer_port,HOST)  # After Register The File Listen to PEER_ID Port for sharing files
-                        self.portMutex += 1
+                if Choice == REGISTER:
+                    #Peer_id = input("Enter PEER ID 4 digit: ")  # Getting PEER_ID
+                    Peer_id = PEER_ID
+                    self.file_name = input("Enter File name: ")  # Getting file_name will be shared
+                    content = self.getContent(self.file_name)
+                    if content == "File does not exist.":
+                        print("Stop this registration.")
                     else:
-                        print("This peer is listening...")
+                        md5 = self.getMd5(self.file_name, content)
+                        self.Peer_port = int(Peer_id)  # Convert Peer_port to int and store as attribute
+                        self.registerInServer(md5, self.flag)  # connect with server and send command to register the file
+                        if self.portMutex == 0:
+                            Start_PeerListener(self.Peer_port,HOST)  # After Register The File Listen to PEER_ID Port for sharing files
+                            self.portMutex += 1
+                        else:
+                            print("This peer is listening...")
                     
-            elif Choice == SEARCH:
-                self.SearchInServer(self.flag)  # Connect with server and send command to search for file name
+                elif Choice == SEARCH:
+                    self.SearchInServer(self.flag)  # Connect with server and send command to search for file name
 
 
-            elif Choice == DOWNLOAD:
-                Peer_id = input("Enter PEER ID 4 digit: ")  # Taking PEER_ID and file_name i want to Download file from
-                while Peer_id == PEER_ID:
-                    Peer_id = input("You cannot download the local file, please enter another node ID: ")
-                file_name = input("Enter File name: ")
-                self.Download(int(Peer_id), file_name)
+                elif Choice == DOWNLOAD:
+                    Peer_id = input("Enter PEER ID 4 digit: ")  # Taking PEER_ID and file_name i want to Download file from
+                    while Peer_id == PEER_ID:
+                        Peer_id = input("You cannot download the local file, please enter another node ID: ")
+                    file_name = input("Enter File name: ")
+                    self.Download(int(Peer_id), file_name)
 
 
-            elif Choice == LIST_ALL:  # SHOW ALL Sharing files that registered in Server
-                self.List_all(self.flag)
+                elif Choice == LIST_ALL:  # SHOW ALL Sharing files that registered in Server
+                    self.List_all(self.flag)
 
-            elif Choice == EXIT:
-                input("enter once to quit.")
-                break
+                elif Choice == EXIT:
+                    input("enter once to quit.")
+                    break
 
-            elif Choice == LIST_LOCAL_FILES:
-                self.getLocalFiles()
+                elif Choice == LIST_LOCAL_FILES:
+                    self.getLocalFiles()
 
-            else:
-                print("Wrong choice. please enter another rigth choice.")
-                continue
+                else:
+                    print("Wrong choice. please enter another rigth choice.")
+                    continue
+            except:
+                print("Unknown error. Please try again.")
         return
 
     #overrided by xiaofeng            
