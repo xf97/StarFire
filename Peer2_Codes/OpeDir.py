@@ -41,3 +41,18 @@ class OpeDir:
 		for i in self.dir:
 			s.add(i["Checksum"])
 		return s
+
+	def searchRecord(self, file_name):
+		results = list()
+		for i in self.dir:
+			if i["file_name"] == file_name:
+				results.append(i)
+			else:
+				continue
+		if len(results) > 0:
+			print("Peer_Id  |     File_name    |  Checksum | Date_added :\n")
+			for item in results:
+				print("  ", item["peer_id"], "   ", item["file_name"], "   ", item["Checksum"], "   ", item["Date_added"])
+		else:
+			print("There is no file has this name or there is no file in server at all\n")
+		return

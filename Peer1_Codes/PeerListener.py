@@ -85,7 +85,7 @@ class PeerListener(threading.Thread):
                 print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
             elif request[0] == REGISTER_CLIENT:
                 print("client register")
-                od =OpeDir()
+                od = OpeDir()
                 od.insertRecord(request)
                 #print(request)
             else:

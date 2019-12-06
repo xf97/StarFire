@@ -36,6 +36,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
     def __init__(self):
         print("WELCOME TO PEER TO PEER SHARING FILE SYSTEM\n")
         print("*" * 10, "This is Peer" + PEER_ID[-1:] + " ", "*" * 10)
+        self.portMutex = 0
+        self.flag = True    #服务器健全标志
         while True:
             # Getting Choice From Peer
             Choice = input("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
@@ -50,12 +52,15 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 else:
                     md5 = self.getMd5(self.file_name, content)
                     self.Peer_port = int(Peer_id)  # Convert Peer_port to int and store as attribute
-                    self.registerInServer(md5)  # connect with server and send command to register the file
-                    Start_PeerListener(self.Peer_port,
-                                   HOST)  # After Register The File Listen to PEER_ID Port for sharing files
+                    self.registerInServer(md5, self.flag)  # connect with server and send command to register the file
+                    if self.portMutex == 0:
+                        Start_PeerListener(self.Peer_port,HOST)  # After Register The File Listen to PEER_ID Port for sharing files
+                        self.portMutex += 1
+                    else:
+                        print("This peer is listening...")
                     
             elif Choice == SEARCH:
-                self.SearchInServer()  # Connect with server and send command to search for file name
+                self.SearchInServer(self.flag)  # Connect with server and send command to search for file name
 
 
             elif Choice == DOWNLOAD:
@@ -82,13 +87,18 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         return
 
     #overrided by xiaofeng            
-    def registerInServer(self, _md5):  # Connect and Send command to Register
+    def registerInServer(self, _md5, _flag):  # Connect and Send command to Register
         '''
         s = socket()
         s.connect((HOST, PORT))
         '''
+        if not _flag:
+            print("System has switched to distributed mode.")
+            self.registerInDistributed(_md5)
+            return
         s = self.detectServer(HOST, PORT)
         if s == None:
+            self.flag = False
             print("System has switched to distributed mode.")
             self.registerInDistributed(_md5)
             return 
@@ -107,10 +117,11 @@ class Peer_Server:  # Connect Peer with Centeral-Server
     def registerToOtherNodes(self, _dir, _port, _filename, _md5):
         index = 0
         #print(str(_infor[0]))
+        port_set = set()   #集合用于避免重复发送
         for i in _dir:
             #print(i)
-            if i["peer_id"] == str(_port):
-                #跳过本节点
+            if i["peer_id"] == str(_port) or i["peer_id"] in port_set:
+                #跳过本节点和已经发送过的节点
                 continue
             else:
                 #组装数据，发送信息
@@ -123,16 +134,22 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 s.close()
                 index += 1
                 print("Register speed: ", index)
+                port_set.add(i["peer_id"])
 
-    def SearchInServer(self):  # Connect and Send command  to Server for Specific File_name
+    def SearchInServer(self, flag):  # Connect and Send command  to Server for Specific File_name
         '''
         s = socket()
         s.connect((HOST, PORT))
         '''
+        if not _flag:
+            print("System has switched to distributed mode.")
+            self.searchInDistributed()
+            return 
         s = self.detectServer(HOST, PORT)
         if s == None:
-            s.close()
+            flag = False
             print("System has switched to distributed mode.")
+            self.searchInDistributed()
             return 
         file_name = input("Enter File Name : ")
         data = pickle.dumps(self.SearchData(file_name))
@@ -140,6 +157,12 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         ret_data = pickle.loads(s.recv(1024))
         self.print_list(ret_data[0], ret_data[1])  # Return List of Files contain that name
         s.close()
+
+    def searchInDistributed(self):
+        file_name = input("Enter File Name : ")
+        print("Reading local data...")
+        od = OpeDir()
+        od.searchRecord(file_name)
 
     def List_all(self):  # Connect and Send command to Server to Show all Exiting Files
         '''
@@ -168,7 +191,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             for item in Files:
                 print("  ", item[keys[0]], "   ", item[keys[1]], "   ", item[keys[2]], "   ", item[keys[3]])
         else:
-            print("There is no file has this name Or There is no file At all\n")
+            print("There is no file has this name or there is no file in server at all\n")
 
     def SearchData(self, file_name):  # Command for Search contains file_name, SEARCH indicator command
         return [SEARCH, file_name]
@@ -258,7 +281,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 print("Successfully connect to server")
             except:
                 print("Connection to server failed. Reconnect after 5 seconds...")
-                #TIME.sleep(5)   #等待5秒
+                TIME.sleep(5)   #等待5秒
                 time += 1
         if flag:
             return s 
