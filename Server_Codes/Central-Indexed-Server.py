@@ -30,6 +30,8 @@ from datetime import datetime
 from socket import *
 from threading import *
 import time #Timing module
+from ServerLog import ServerLogger  #导入服务器端日志库
+import logging
 
 #xf added
 import sys
@@ -40,6 +42,7 @@ from Constants.Constant import *
 
 class Server(threading.Thread):
     def __init__(self, port, host, max_connection):
+        self.logger = ServerLogger()    #初始化日志记录
     	#Initialize the thread
         threading.Thread.__init__(self)
         self.host = 'localhost'
@@ -56,12 +59,14 @@ class Server(threading.Thread):
     def run(self):
         while True:
             conn, addr = self.sock.accept()
-            print("Got Connection From ", addr[0], " : ", addr[1])
+            #print("Got Connection From ", addr[0], " : ", addr[1])
+            self.logger.writingLog(logging.INFO, "Got Connection From " + str(addr[0]) + " : " + str(addr[1]))
             #Decode the data sent by the client
             request = pickle.loads(conn.recv(1024))
 
             if request[0] == REGISTER:  # Register File and Send Confirmation Msg
-                print("Peer ", addr[1], " ,Add New File\n")
+                #print("Peer ", addr[1], " ,Add New File\n")
+                self.logger.writingLog(logging.INFO, "Peer " + str(addr[1]) +  " ,Add New File")
                 self.semaphore.acquire()
                 if self.register(request[1], request[2], request[3], str(datetime.now())):
                 	ret = "File Registered Successfully,"
@@ -73,7 +78,8 @@ class Server(threading.Thread):
 
 
             elif request[0] == SEARCH:  # Search for File_Name and return List of Files That Match the name
-                print("Peer ", addr[1], " ,Searching For a File\n")
+                #print("Peer ", addr[1], " ,Searching For a File\n")
+                self.logger.writingLog(logging.INFO, "Peer " + str(addr[1]) + " ,Searching For a File\n")
                 self.semaphore.acquire()
                 #Encrypt data before sending it
                 #print(self.Search_data(request[1]))
@@ -85,7 +91,8 @@ class Server(threading.Thread):
 
 
             elif request[0] == LIST_ALL:  # List All Exiting Files and return as a object with pickle
-                print("Peer ", addr[1], " ,Listing all Exiting Files\n")
+                #print("Peer ", addr[1], " ,Listing all Exiting Files\n")
+                self.logger.writingLog(logging.INFO, "Peer " + str(addr[1]) + " ,Listing all Exiting Files\n")
                 self.semaphore.acquire()
                 ret_data = pickle.dumps(self.all_data())
                 conn.send(ret_data)
@@ -133,8 +140,10 @@ def getEachPort(_Files):
     return s
 
 def distrubuteDir(_Files):
+    sl = ServerLogger()
     if len(_Files) != 0:
-        print("Time 30 seconds")
+        #print("Time 30 seconds")
+        sl.writingLog(logging.INFO, "Time 30 seconds")
         index = 1
         s = getEachPort(_Files)
         for i in s:
@@ -144,15 +153,18 @@ def distrubuteDir(_Files):
                 #加密数据
                 file_data = pickle.dumps(_Files)
                 i_socket.send(file_data)
-                print("\rDelivery schedule: ", round(float(index) / len(s), 2), end = " ") #进度条
+                #print("\rDelivery schedule: ", round(float(index) / len(s), 2), end = " ") #进度条
+                sl.writingLog(logging.DEBUG, "Delivery schedule: " + str(round(float(index) / len(s), 2)))
                 i_socket.close()
                 index += 1
             except:
-                print("\rDelivery schedule: ", round(float(index) / len(s), 2), end = " ") #进度条
+                #print("\rDelivery schedule: ", round(float(index) / len(s), 2), end = " ") #进度条
+                sl.writingLog(logging.DEBUG, "Delivery schedule: " + str(round(float(index) / len(s), 2)))
                 index += 1  #如果连接节点发生异常，保持正常运行
     else:
-        print("The directory is empty and no data is sent.")
-    print()
+        sl.writingLog(logging.INFO, "The directory is empty and no data is sent.")
+        #print("The directory is empty and no data is sent.")
+    #print()
     threading.Timer(TIME_GAP, distrubuteDir, (_Files,)).start()
 
 
