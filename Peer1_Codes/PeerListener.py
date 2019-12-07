@@ -17,6 +17,8 @@ from socket import *
 from threading import Semaphore
 import platform
 from OpeDir import OpeDir
+import logging 
+from clientLogger import ClientLogger
 
 #xf added
 import sys
@@ -30,6 +32,7 @@ PEER_ID = "0001"
 
 class PeerListener(threading.Thread):
     def __init__(self, port, host, max_connection):
+        self.logger = ClientLogger()
         threading.Thread.__init__(self)
         #threading.Thread.setDaemon(True)
         self.host = host
@@ -49,12 +52,15 @@ class PeerListener(threading.Thread):
             '''
             #print("The port is already in use. we change your port to another one: ", new_port)
             print("This port is already listening.")
+            self.logger.writingLog(logging.INFO, "This port is already listening.")
 
     def run(self):
         print("And This Peer is Ready For Sharing his File\n")
+        self.logger.writingLog(logging.INFO, "And This Peer is Ready For Sharing his File\n")
         while True:
             conn, addr = self.sock.accept()
-            print("Got Connection From ", addr[0], " : ", addr[1])
+            #print("Got Connection From ", addr[0], " : ", addr[1])
+            self.logger.writingLog(logging.INFO, "Got Connection From " + str(addr[0]) + " : " + str(addr[1]))
             request = pickle.loads(conn.recv(1024))
             if request[0] == DOWNLOAD:  # Organizing the path of file that will be shared
                 '''
@@ -81,19 +87,23 @@ class PeerListener(threading.Thread):
                             conn.close()
                             break
                 self.semaphore.release()
-                print('File Sent')
+                #print('File Sent')
+                self.logger.writingLog(logging.INFO, "File sent.")
                 print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
             elif request[0] == REGISTER_CLIENT:
-                print("client register")
+                #print("client register")
+                self.logger.writingLog(logging.INFO, "client register")
                 od = OpeDir()
                 od.insertRecord(request)
                 #print(request)
             else:
-                print("I got the directory.")
+                #print("I got the directory.")
+                self.logger.writingLog(logging.INFO, "Got the directory")
                 #持久保存在本地
                 with open("dir.data", "wb") as file:
                     pickle.dump(request, file)
-                print("Local directory caching is complete. ", len(request))
+                #print("Local directory caching is complete. ", len(request))
+                self.logger.writingLog(logging.INFO, "Local directory caching is complete. " + str(len(request)))
 
 
 

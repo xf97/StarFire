@@ -1,3 +1,21 @@
-2019-12-07  11:15:59 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Got Connection From 127.0.0.1 : 48164 
-2019-12-07  11:23:59 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py The directory is empty and no data is sent. 
-2019-12-07  11:24:29 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py The directory is empty and no data is sent. 
+2019-12-07  12:01:09 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py The directory is empty and no data is sent. 
+2019-12-07  12:01:22 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Got Connection From 127.0.0.1 : 48452 
+2019-12-07  12:01:22 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Peer 48452 ,Add New File 
+2019-12-07  12:01:27 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Got Connection From 127.0.0.1 : 48454 
+2019-12-07  12:01:27 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Peer 48454 ,Add New File 
+2019-12-07  12:01:39 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Time 30 seconds 
+2019-12-07  12:01:39 Sat  root DEBUG /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Delivery schedule: 0.5 
+2019-12-07  12:01:39 Sat  root DEBUG /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Delivery schedule: 1.0 
+2019-12-07  12:01:50 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Got Connection From 127.0.0.1 : 48460 
+2019-12-07  12:02:00 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Peer 48460 ,Searching For a File
+ 
+2019-12-07  12:02:02 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Got Connection From 127.0.0.1 : 48462 
+2019-12-07  12:02:02 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Peer 48462 ,Listing all Exiting Files
+ 
+2019-12-07  12:02:09 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Time 30 seconds 
+2019-12-07  12:02:09 Sat  root DEBUG /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Delivery schedule: 0.5 
+2019-12-07  12:02:09 Sat  root DEBUG /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Delivery schedule: 1.0 
+2019-12-07  12:02:39 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Time 30 seconds 
+2019-12-07  12:02:39 Sat  root DEBUG /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Delivery schedule: 0.5 
+2019-12-07  12:02:39 Sat  root DEBUG /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py Delivery schedule: 1.0 
+2019-12-07  12:05:08 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Server_Codes/ServerLog.py The directory is empty and no data is sent. 

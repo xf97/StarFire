@@ -1,0 +1,41 @@
+2019-12-07  11:58:14 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py **********This is Peer1 ********** 
+2019-12-07  12:01:17 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py **********This is Peer1 ********** 
+2019-12-07  12:01:27 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connecting to server... 
+2019-12-07  12:01:27 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Successfully connect to server 
+2019-12-07  12:01:27 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py File Registered Successfully, 
+2019-12-07  12:01:27 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py And This Peer is Ready For Sharing his File
+ 
+2019-12-07  12:01:39 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got Connection From 127.0.0.1 : 60520 
+2019-12-07  12:01:39 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got the directory 
+2019-12-07  12:01:39 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Local directory caching is complete. 2 
+2019-12-07  12:02:02 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connecting to server... 
+2019-12-07  12:02:02 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Successfully connect to server 
+2019-12-07  12:02:09 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got Connection From 127.0.0.1 : 60528 
+2019-12-07  12:02:09 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got the directory 
+2019-12-07  12:02:09 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Local directory caching is complete. 2 
+2019-12-07  12:02:25 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got Connection From 127.0.0.1 : 60536 
+2019-12-07  12:02:25 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py File sent. 
+2019-12-07  12:02:39 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got Connection From 127.0.0.1 : 60542 
+2019-12-07  12:02:39 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got the directory 
+2019-12-07  12:02:39 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Local directory caching is complete. 2 
+2019-12-07  12:03:05 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got Connection From 127.0.0.1 : 60552 
+2019-12-07  12:03:05 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py client register 
+2019-12-07  12:03:13 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connecting to server... 
+2019-12-07  12:03:13 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connection to server failed. Reconnect after 5 seconds... 
+2019-12-07  12:03:18 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connecting to server... 
+2019-12-07  12:03:18 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connection to server failed. Reconnect after 5 seconds... 
+2019-12-07  12:03:23 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connecting to server... 
+2019-12-07  12:03:23 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connection to server failed. Reconnect after 5 seconds... 
+2019-12-07  12:03:28 Sat  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py The maximum number of retries is reached and the connection to the server fails.Switch to distributed mode... 
+2019-12-07  12:03:32 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py System has switched to distributed mode. 
+2019-12-07  12:03:35 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Reading local data... 
+2019-12-07  12:03:46 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py File Downloaded Successfully 
+2019-12-07  12:03:46 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Mario.txtis in /Peer1Files/downloads 
+2019-12-07  12:03:58 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py System has switched to distributed mode. 
+2019-12-07  12:03:58 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Read local directory... 
+2019-12-07  12:03:58 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Register speed: 1 
+2019-12-07  12:03:58 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py This peer is listening... 
+2019-12-07  12:04:05 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Got Connection From 127.0.0.1 : 60564 
+2019-12-07  12:04:05 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py File sent. 
+2019-12-07  12:05:12 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py **********This is Peer1 ********** 
+2019-12-07  12:05:13 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py client closed. 

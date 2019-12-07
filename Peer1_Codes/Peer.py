@@ -26,6 +26,8 @@ import hashlib  #产生校验和
 import os
 import time as TIME
 from OpeDir import OpeDir
+import logging
+from clientLogger import ClientLogger
 
 #节点号
 PEER_ID = "0001"
@@ -40,7 +42,9 @@ class Peer_Server:  # Connect Peer with Centeral-Server
     def __init__(self):
         print("WELCOME TO PEER TO PEER SHARING FILE SYSTEM\n")
         print("-" * 15 ,"Only after registration can you join the network", "-" * 15)
-        print("*" * 10, "This is Peer" + PEER_ID[-1:] + " ", "*" * 10)
+        self.logger = ClientLogger()
+        #print("*" * 10, "This is Peer" + PEER_ID[-1:] + " ", "*" * 10)
+        self.logger.writingLog(logging.INFO, ("*" * 10) + "This is Peer" + str(PEER_ID[-1:]) + " " + str("*" * 10))
         self.portMutex = 0
         self.flag = True    #服务器健全标志
         while True:
@@ -55,6 +59,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                     content = self.getContent(self.file_name)
                     if content == "File does not exist.":
                         print("Stop this registration.")
+                        self.logger(logging.ERROR, "Stop this registration.")
                     else:
                         md5 = self.getMd5(self.file_name, content)
                         self.Peer_port = int(Peer_id)  # Convert Peer_port to int and store as attribute
@@ -64,6 +69,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                             self.portMutex += 1
                         else:
                             print("This peer is listening...")
+                            self.logger.writingLog(logging.INFO, "This peer is listening...")
                     
                 elif Choice == SEARCH:
                     self.SearchInServer(self.flag)  # Connect with server and send command to search for file name
@@ -81,6 +87,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                     self.List_all(self.flag)
 
                 elif Choice == EXIT:
+                    self.logger.writingLog(logging.INFO, "client closed.")
                     input("enter once to quit.")
                     break
 
@@ -89,9 +96,11 @@ class Peer_Server:  # Connect Peer with Centeral-Server
 
                 else:
                     print("Wrong choice. please enter another rigth choice.")
+                    self.logger.writingLog(logging.WARNING, "Wrong choice. please enter another rigth choice.")
                     continue
             except:
                 print("Unknown error. Please try again.")
+                self.logger.writingLog(logging.ERROR, "Unknown error. Please try again.")
         return
 
     #overrided by xiaofeng            
@@ -101,7 +110,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         s.connect((HOST, PORT))
         '''
         if not _flag:
-            print("System has switched to distributed mode.")
+            #print("System has switched to distributed mode.")
+            self.logger.writingLog(logging.INFO, "System has switched to distributed mode.")
             self.registerInDistributed(_md5)
             return
         s = self.detectServer(HOST, PORT)
@@ -114,6 +124,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         s.send(data)
         state = s.recv(1024)
         print(state.decode('utf-8'))  # Receive Confirmation of Registration
+        self.logger.writingLog(logging.INFO, state.decode('utf-8'))
         s.close()
 
     def registerInDistributed(self, _md5):
@@ -141,7 +152,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 s.send(data)
                 s.close()
                 index += 1
-                print("Register speed: ", index)
+                #print("Register speed: ", index)
+                self.logger.writingLog(logging.INFO, "Register speed: " + str(index))
                 port_set.add(i["peer_id"])
 
     def SearchInServer(self, _flag):  # Connect and Send command  to Server for Specific File_name
@@ -150,7 +162,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         s.connect((HOST, PORT))
         '''
         if not _flag:
-            print("System has switched to distributed mode.")
+            #print("System has switched to distributed mode.")
+            self.logger.writingLog(logging.INFO, "System has switched to distributed mode.")
             self.searchInDistributed()
             return 
         s = self.detectServer(HOST, PORT)
@@ -168,7 +181,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
 
     def searchInDistributed(self):
         file_name = input("Enter File Name : ")
-        print("Reading local data...")
+        #print("Reading local data...")
+        self.logger.writingLog(logging.INFO, "Reading local data...")
         od = OpeDir()
         od.searchRecord(file_name)
 
@@ -178,7 +192,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         s.connect((HOST, PORT))
         '''
         if not _flag:
-            print("System has switched to distributed mode.")
+            #print("System has switched to distributed mode.")
+            self.logger.writingLog(logging.INFO, "System has switched to distributed mode.")            
             self.List_all_distrubuted()
             return 
         s = self.detectServer(HOST, PORT)
@@ -209,6 +224,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 print("  ", item[keys[0]], "   ", item[keys[1]], "   ", item[keys[2]], "   ", item[keys[3]])
         else:
             print("There is no file has this name or there is no file in server at all\n")
+            self.logger.writingLog(logging.INFO, "There is no file has this name or there is no file in server at all\n")
 
     def SearchData(self, file_name):  # Command for Search contains file_name, SEARCH indicator command
         return [SEARCH, file_name]
@@ -233,7 +249,9 @@ class Peer_Server:  # Connect Peer with Centeral-Server
                 myfile.write(data)
         s.close()
         print('File Downloaded Successfully')
+        self.logger.writingLog(logging.INFO, 'File Downloaded Successfully')
         print(file_name, "is in /Peer", PEER_ID[-1:] + "Files/downloads")
+        self.logger.writingLog(logging.INFO, str(file_name) + "is in /Peer" + str(PEER_ID[-1:]) + "Files/downloads")
 
     #xf added
     #get md5 num of file
@@ -246,7 +264,8 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             str_md5 = m.hexdigest()
             return str_md5
         except:
-            print(_filename, " md5 failed.")
+            #print(_filename, " md5 failed.")
+            self.logger.writingLog(logging.ERROR, str(_filename) + " md5 failed.")
             return "md5 failed"
 
     #xf added
@@ -267,6 +286,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         except:
             content = None
             print(file_path, " doesn't exist.")
+            self.logger.writingLog(logging.INFO, str(file_path) + " doesn't exist.")
         if content:
             return content
         else:
@@ -281,7 +301,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         print("file name:")
         for i in localFiles:
             print(i)
-        print()
+        print("-" * 15)
         print("It's over. You can't share files that don't already exist on your computer. If you want to share new files, just copy them to uploads folder.")
 
     def detectServer(self, _host, _port):
@@ -292,22 +312,27 @@ class Peer_Server:  # Connect Peer with Centeral-Server
             s = socket()
             try:
                 print("Connecting to server...")
+                self.logger.writingLog(logging.WARNING, "Connecting to server...")
                 s.connect((_host, _port))
                 flag = True
                 time += 1
                 print("Successfully connect to server")
+                self.logger.writingLog(logging.INFO, "Successfully connect to server")
             except:
                 print("Connection to server failed. Reconnect after 5 seconds...")
+                self.logger.writingLog(logging.WARNING, "Connection to server failed. Reconnect after 5 seconds...")
                 TIME.sleep(5)   #等待5秒
                 time += 1
         if flag:
             return s 
         else:
             print("The maximum number of retries is reached and the connection to the server fails.Switch to distributed mode....")
+            self.logger.writingLog(logging.ERROR, "The maximum number of retries is reached and the connection to the server fails.Switch to distributed mode...")
             return None
 
     def getDirectory(self):
-        print("Read local directory...")
+        #print("Read local directory...")
+        self.logger.writingLog(logging.INFO, "Read local directory...")
         with open("dir.data", "rb") as file:
             dir = pickle.load(file)
         #print(type(dir[0]))
