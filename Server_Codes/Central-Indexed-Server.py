@@ -52,7 +52,18 @@ class Server(threading.Thread):
         self.sock = socket()
         self.sock.bind((self.host, self.port))  # bind socket to address
         self.sock.listen(max_connection)
-        self.Files = []
+        #如果有本地目录结构，读取
+        try:
+            print("Read the local directory structure...", end = " ")
+            self.logger.writingLog(logging.INFO, "Read the local directory structure...")
+            with open("dir.data", "rb") as file:
+                self.Files = pickle.load(file)
+            print("\t done")
+            self.logger.writingLog(logging.INFO, "\t done")
+        except:
+            self.Files = []
+            print("There is no directory structure locally.")
+            self.logger.writingLog(logging.INFO, "There is no directory structure locally.")
         self.keys = ['peer_id', 'file_name', 'Checksum', 'Date_added']
         print("Server Start listening on", self.host, " : ", self.port)
 
@@ -69,7 +80,10 @@ class Server(threading.Thread):
                 self.logger.writingLog(logging.INFO, "Peer " + str(addr[1]) +  " ,Add New File")
                 self.semaphore.acquire()
                 if self.register(request[1], request[2], request[3], str(datetime.now())):
-                	ret = "File Registered Successfully,"
+                    ret = "File Registered Successfully,"
+                    file = open("dir.data", "wb")
+                    pickle.dump(self.Files, file)
+                    self.logger.writingLog(logging.INFO, "The directory structure has been updated.")
                 else:
                 	ret = "This file has already been registered in the server. Duplicate registration is not allowed."
                 conn.send(bytes(ret, 'utf-8'))

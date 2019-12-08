@@ -39,3 +39,11 @@
 2019-12-07  12:04:05 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py File sent. 
 2019-12-07  12:05:12 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py **********This is Peer1 ********** 
 2019-12-07  12:05:13 Sat  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py client closed. 
+2019-12-08  10:54:00 Sun  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py **********This is Peer1 ********** 
+2019-12-08  10:54:07 Sun  root ERROR /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Connecting to server... 
+2019-12-08  10:54:07 Sun  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py Successfully connect to server 
+2019-12-08  10:54:07 Sun  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py  
+2019-12-08  10:54:07 Sun  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py And This Peer is Ready For Sharing his File
+ 
+2019-12-08  10:54:39 Sun  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py client closed. 
+2019-12-08  11:01:14 Sun  root INFO /home/xiaofeng/桌面/MyGithub/StarFile/StarFire/Peer1_Codes/clientLogger.py **********This is Peer1 ********** 
