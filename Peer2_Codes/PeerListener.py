@@ -89,7 +89,7 @@ class PeerListener(threading.Thread):
                 self.semaphore.release()
                 #print('File Sent')
                 self.logger.writingLog(logging.INFO, "File sent.")
-                print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
+                print("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)Reconnect the server (7)EXIT\n")
             elif request[0] == REGISTER_CLIENT:
                 #print("client register")
                 self.logger.writingLog(logging.INFO, "client register")

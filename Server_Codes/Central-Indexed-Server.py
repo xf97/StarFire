@@ -73,7 +73,10 @@ class Server(threading.Thread):
             #print("Got Connection From ", addr[0], " : ", addr[1])
             self.logger.writingLog(logging.INFO, "Got Connection From " + str(addr[0]) + " : " + str(addr[1]))
             #Decode the data sent by the client
-            request = pickle.loads(conn.recv(1024))
+            try:
+                request = pickle.loads(conn.recv(1024))
+            except:
+                continue
 
             if request[0] == REGISTER:  # Register File and Send Confirmation Msg
                 #print("Peer ", addr[1], " ,Add New File\n")
@@ -83,6 +86,7 @@ class Server(threading.Thread):
                     ret = "File Registered Successfully,"
                     file = open("dir.data", "wb")
                     pickle.dump(self.Files, file)
+                    file.close()
                     self.logger.writingLog(logging.INFO, "The directory structure has been updated.")
                 else:
                 	ret = "This file has already been registered in the server. Duplicate registration is not allowed."

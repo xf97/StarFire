@@ -50,7 +50,7 @@ class Peer_Server:  # Connect Peer with Centeral-Server
         while True:
             try:
                 # Getting Choice From Peer
-                Choice = input("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)EXIT\n")
+                Choice = input("TYPE :(1)REGISTER (2) SEARCH (3) DOWNLOAD (4) LIST_ALL (5)LIST_LOCAL_FILES (6)Reconnect the server (7)EXIT\n")
 
                 if Choice == REGISTER:
                     #Peer_id = input("Enter PEER ID 4 digit: ")  # Getting PEER_ID
@@ -93,6 +93,17 @@ class Peer_Server:  # Connect Peer with Centeral-Server
 
                 elif Choice == LIST_LOCAL_FILES:
                     self.getLocalFiles()
+
+                elif Choice == RECONNECT:
+                    so = self.detectServer(HOST, PORT)
+                    if not so:
+                        print("Unable to connect to server.")
+                        self.logger.writingLog(logging.ERROR, "Unable to connect to server.")
+                    else:
+                        so.close()
+                        self.flag = True
+                        print("Successfully connect to server, switch to centralized mode.")
+                        self.logger.writingLog(logging.INFO, "Successfully connect to server, switch to centralized mode.")
 
                 else:
                     print("Wrong choice. please enter another rigth choice.")
