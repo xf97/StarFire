@@ -88,7 +88,7 @@ class testDriver:
 
 	def Distribution(self):
 		print("-" * 15, "测试阶段2：分布式P2P文件共享系统", "-" * 15)
-		print("Step 1: 终止中心节点: 请切换到中心节点程序运行的终端, 使用ctrl+c指令终止程序.")
+		print("Step 1: 终止中心节点: 请切换到中心节点程序运行的终端, 使用任意办法(推荐ctrl+c或者关掉窗口)终止程序.")
 		self.inputGap()
 		print("Step 2: 请在任意子节点中使用除5,7之外的任意一个功能(功能5并不连接服务器, 功能7退出程序). 子节点会在三次连接服务器失败后切换到分布式模式运行...")
 		self.inputGap()
@@ -111,7 +111,7 @@ class testDriver:
 
 	def end(self):
 		print("-" * 70)
-		print("功能测试已经结束, 请使用功能7退出子节点程序, 请使用ctrl+c指令终止中心节点程序.")
+		print("功能测试已经结束, 请使用功能7退出子节点程序, 请使用任意办法(推荐ctrl+c或者关掉窗口)终止中心节点程序.")
 		choice = input("输入1查看当前不足, 输入２直接退出程序: ")
 		while choice != "1" and choice != "2":
 			choice = input("请输入正确的选项. 输入1查看当前不足, 输入２直接退出程序: ")

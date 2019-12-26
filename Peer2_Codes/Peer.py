@@ -241,22 +241,31 @@ class Peer_Server:  # Connect Peer with Centeral-Server
 
     def Download(self, Peer_id, file_name):  # Connect and Send request for downloading from specific PEER_PORT
         s = socket()
+        #print("0")
         s.connect((HOST, Peer_id))
+        #print("1")
         data = pickle.dumps([DOWNLOAD, str(file_name)])
         s.send(data)
-
-        file_path = os.path.join(os.getcwd(), '..')  # Organizing the path of file that will be Download
+        #print("2")
+        #file_path = os.path.join(os.getcwd(), '..')  # Organizing the path of file that will be Download
+        '''
+        file_path = "../"
         file_path = os.path.join(file_path, "Peer" + PEER_ID[-1:] + 'Files')
         file_path = os.path.join(file_path, "downloads")
-
-        with open(os.path.join(file_path, file_name),  # writing to file
-                  'wb') as myfile:
-            while True:
-                data = s.recv(1024)
-                if not data:
-                    myfile.close()
-                    break
-                myfile.write(data)
+        print(file_path)
+        '''
+        if "windows" in platform.system() or "Windows" in platform.system():
+                    file_path = "..\\Peer" + PEER_ID[-1:] +"Files\\downloads\\" + file_name  # Organizing the path of file that will be Download
+        elif "Linux" in platform.system():
+                    file_path = "../Peer" + PEER_ID[-1:] + "Files/downloads/" +file_name
+        #print(file_path)
+       	with open(file_path,'wb') as myfile:
+        	while True:
+        		data = s.recv(1024)
+        		if not data:
+        			myfile.close()
+        			break
+        		myfile.write(data)
         s.close()
         print('File Downloaded Successfully')
         self.logger.writingLog(logging.INFO, 'File Downloaded Successfully')

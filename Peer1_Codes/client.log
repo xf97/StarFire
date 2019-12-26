@@ -1,0 +1,64 @@
+2019-12-26  19:29:17 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py **********This is Peer1 ********** 
+2019-12-26  19:29:23 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:29:23 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server 
+2019-12-26  19:29:23 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py There is no file has this name or there is no file in server at all
+ 
+2019-12-26  19:29:33 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:29:33 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server 
+2019-12-26  19:29:33 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File Registered Successfully, 
+2019-12-26  19:29:33 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py And This Peer is Ready For Sharing his File
+ 
+2019-12-26  19:29:45 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:29:45 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server 
+2019-12-26  19:29:45 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File Registered Successfully, 
+2019-12-26  19:29:45 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py This peer is listening... 
+2019-12-26  19:29:53 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:29:53 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server 
+2019-12-26  19:30:01 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:30:01 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server 
+2019-12-26  19:30:01 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server, switch to centralized mode. 
+2019-12-26  19:30:01 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got Connection From 127.0.0.1 : 49309 
+2019-12-26  19:30:01 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got the directory 
+2019-12-26  19:30:01 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Local directory caching is complete. 4 
+2019-12-26  19:30:17 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File Downloaded Successfully 
+2019-12-26  19:30:17 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py b.txtis in /Peer1Files/downloads 
+2019-12-26  19:30:23 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got Connection From 127.0.0.1 : 49312 
+2019-12-26  19:30:23 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File sent. 
+2019-12-26  19:30:37 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File Downloaded Successfully 
+2019-12-26  19:30:37 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py d.txtis in /Peer1Files/downloads 
+2019-12-26  19:31:13 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got Connection From 127.0.0.1 : 49314 
+2019-12-26  19:31:13 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File sent. 
+2019-12-26  19:32:46 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got Connection From 127.0.0.1 : 49318 
+2019-12-26  19:32:46 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py client register 
+2019-12-26  19:32:53 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Wrong choice. please enter another rigth choice. 
+2019-12-26  19:32:59 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:33:01 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connection to server failed. Reconnect after 5 seconds... 
+2019-12-26  19:33:06 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:33:08 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connection to server failed. Reconnect after 5 seconds... 
+2019-12-26  19:33:13 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:33:15 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connection to server failed. Reconnect after 5 seconds... 
+2019-12-26  19:33:20 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py The maximum number of retries is reached and the connection to the server fails.Switch to distributed mode... 
+2019-12-26  19:33:25 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py System has switched to distributed mode. 
+2019-12-26  19:33:25 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Read local directory... 
+2019-12-26  19:33:25 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Register speed: 1 
+2019-12-26  19:33:25 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py This peer is listening... 
+2019-12-26  19:33:59 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got Connection From 127.0.0.1 : 53164 
+2019-12-26  19:33:59 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got the directory 
+2019-12-26  19:33:59 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Local directory caching is complete. 4 
+2019-12-26  19:34:09 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:34:09 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server 
+2019-12-26  19:34:09 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server, switch to centralized mode. 
+2019-12-26  19:34:12 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:34:12 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server 
+2019-12-26  19:34:29 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got Connection From 127.0.0.1 : 53175 
+2019-12-26  19:34:29 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got the directory 
+2019-12-26  19:34:29 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Local directory caching is complete. 4 
+2019-12-26  19:34:29 Thu  root ERROR C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Connecting to server... 
+2019-12-26  19:34:29 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Successfully connect to server 
+2019-12-26  19:34:29 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File Registered Successfully, 
+2019-12-26  19:34:29 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py This peer is listening... 
+2019-12-26  19:34:41 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py Got Connection From 127.0.0.1 : 53180 
+2019-12-26  19:34:41 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File sent. 
+2019-12-26  19:34:49 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py File Downloaded Successfully 
+2019-12-26  19:34:49 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py f.txtis in /Peer1Files/downloads 
+2019-12-26  19:34:51 Thu  root INFO C:\Users\XF\Desktop\文件们\StarFire\Peer1_Codes\clientLogger.py client closed. 
