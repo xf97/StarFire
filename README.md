@@ -5,10 +5,10 @@
 This is a *distributed computing course assignment* that my partner (@ZzzhangTtt, Zhangmeng) and I are working on developing a P2P file sharing system. A simple centralized P2P file-sharing system (based on the directory method) can affect performance if the master node fails. The basic idea is to increase the number of master nodes, but this can cause data consistency problems. To solve this problem, our idea is that **StarFire** is a standard, centralized P2P file sharing system when the master node is normal. Only the master node will send the **directory data** to each peer node every once in a while. After the master node failed, **StarFire** switched to a distributed P2P file system and continued to work.
 
 # Usage
-'''
+```
 cd Use guidance
 python3 Instructions.py
-'''
+```
 Following the instructions of this program, you can fully understand the **usage**, **functions** and **disadvantages** of *StarFire*. Because my English is not good (these statements are translated by Google), so the instructions are written in Chinese. Please use them in combination with the translation.
 
 
