@@ -1,4 +1,5 @@
 # StarFire
+<img src="./starfireLogo.jpg" alt="Logo" width="500"/>
 **StarFire** is a semi-centralized P2P file sharing system that we developed based on @MeGaCrazy's work (thanks to them). **StarFire** is a centralized P2P file sharing system (based on the directory method) when the master node is normal. After the failure of the master node, **StarFire**'s working mode is transformed into a distributed P2P file sharing system.
 
 # Idea
