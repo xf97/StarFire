@@ -63,7 +63,7 @@ class testDriver:
 		print("此时,中心节点已经启动.")
 		print("此目录下各文件作用为, Central-Indexed-Server.py---服务器主文件, OpeDir.py---目录操作文件, 使得服务器宕机重启后仍然能够读取上一次的目录数据, ServerLog.py---服务器端日志文件, 负责生成服务器的运行日志.")
 		self.inputGap()
-		print("Step 2: 启动两个测试子节点: 请分别进入Peer1_Codes和Peer2_Codes文件夹, 使用终端键入以下命令：")
+		print("Step 2: 启动两个测试子节点: 请分别进入Peer1_Codes和Peer2_Codes文件夹, 使用终端键入以下命令(在win10下使用管理员模式打开命令行, 忽略sudo命令)：")
 		print("sudo python3 Peer.py")
 		print("此目录下各文件作用为, Peer.py---客户端主文件, PeerListener.py---客户端监听文件, OpeDir.py---目录操作文件, clientLogger.py---客户端日志文件")
 		print("此时你能在终端中看见子节点的菜单, 本地准备共享的文件在Peer1Files和Pee2Files中的Uploads文件夹中, 已经下载的文件在Peer1Files和Pee2Files中的downloads文件夹中")
