@@ -59,7 +59,7 @@ class testDriver:
 		print("-" * 15, "测试阶段1：集中式P2P文件共享系统", "-" * 15)
 		input("请跟随如下指令操作, 回车以继续...")
 		print("Step 1: 启动中心节点: 请打开Server_Codes文件夹, 使用终端键入以下命令：")
-		print("python3 Central-Indexed-Server.py")
+		print("python3 Central-Indexed-Server.py    tips: 在win10下也可双击start.bat批处理文件直接开启两个子节点和服务器节点")
 		print("此时,中心节点已经启动.")
 		print("此目录下各文件作用为, Central-Indexed-Server.py---服务器主文件, OpeDir.py---目录操作文件, 使得服务器宕机重启后仍然能够读取上一次的目录数据, ServerLog.py---服务器端日志文件, 负责生成服务器的运行日志.")
 		self.inputGap()
